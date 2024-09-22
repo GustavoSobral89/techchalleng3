@@ -18,6 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -62,10 +63,45 @@ public class ReservaControllerTest {
         reserva.setDataHora(LocalDateTime.now());
         reserva.setNumeroPessoas(4);
 
-        when(reservaService.buscarReservasPorRestaurante("1")).thenReturn(Collections.singletonList(reserva));
+        when(reservaService.buscarReservasPorRestaurante("1"))
+                .thenReturn(Collections.singletonList(reserva));
 
         mockMvc.perform(get("/reservas/restaurante/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].idRestaurante").value("1"));
+    }
+
+    @Test
+    public void deveBuscarReservasPorStatus() throws Exception {
+        Reserva reserva = new Reserva();
+        reserva.setId("1");
+        reserva.setIdRestaurante("1");
+        reserva.setIdUsuario("usuario123");
+        reserva.setStatus("PENDENTE");
+
+        when(reservaService.buscarReservasPorStatus("PENDENTE"))
+                .thenReturn(Collections.singletonList(reserva));
+
+        mockMvc.perform(get("/reservas/status/PENDENTE"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].status").value("PENDENTE"));
+    }
+
+    @Test
+    public void deveAtualizarStatusReserva() throws Exception {
+        String statusJson = "\"CONFIRMADA\"";
+
+        Reserva reserva = new Reserva();
+        reserva.setId("1");
+        reserva.setIdRestaurante("1");
+        reserva.setStatus("CONFIRMADA"); // Novo status após a atualização
+
+        when(reservaService.atualizarStatusReserva("1", "CONFIRMADA")).thenReturn(reserva);
+
+        mockMvc.perform(put("/reservas/1/status")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(statusJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CONFIRMADA")); // Verifique o novo status
     }
 }

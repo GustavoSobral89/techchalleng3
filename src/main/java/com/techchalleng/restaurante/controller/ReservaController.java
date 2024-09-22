@@ -23,4 +23,14 @@ public class ReservaController {
     public ResponseEntity<List<Reserva>> buscarReservasPorRestaurante(@PathVariable String idRestaurante) {
         return ResponseEntity.ok(reservaService.buscarReservasPorRestaurante(idRestaurante));
     }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Reserva>> buscarReservasPorStatus(@PathVariable String status) {
+        return ResponseEntity.ok(reservaService.buscarReservasPorStatus(status));
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Reserva> atualizarStatusReserva(@PathVariable String id, @RequestBody String status) {
+        return ResponseEntity.ok(reservaService.atualizarStatusReserva(id, status.replace("\"", "")));
+    }
 }

@@ -19,4 +19,14 @@ public class ReservaService {
     public List<Reserva> buscarReservasPorRestaurante(String idRestaurante) {
         return reservaRepository.findByIdRestaurante(idRestaurante);
     }
+
+    public List<Reserva> buscarReservasPorStatus(String status) {
+        return reservaRepository.findByStatus(status);
+    }
+
+    public Reserva atualizarStatusReserva(String id, String status) {
+        Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new RuntimeException("Reserva não encontrada"));
+        reserva.setStatus(status);
+        return reservaRepository.save(reserva);
+    }
 }

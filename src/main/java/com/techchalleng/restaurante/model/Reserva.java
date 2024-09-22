@@ -15,4 +15,5 @@ public class Reserva {
     private String idUsuario;
     private LocalDateTime dataHora;
     private int numeroPessoas;
+    private String status; // Exemplo: "PENDENTE", "CONFIRMADA", "CANCELADA"
 }

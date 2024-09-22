@@ -28,10 +28,10 @@ public class ReservaServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         reserva = new Reserva();
+        reserva.setId("1");
         reserva.setIdRestaurante("1");
         reserva.setIdUsuario("usuario123");
-        reserva.setDataHora(LocalDateTime.now());
-        reserva.setNumeroPessoas(4);
+        reserva.setStatus("PENDENTE");
     }
 
     @Test
@@ -47,5 +47,22 @@ public class ReservaServiceTest {
         List<Reserva> resultado = reservaService.buscarReservasPorRestaurante("1");
         assertEquals(1, resultado.size());
         assertEquals(reserva.getIdRestaurante(), resultado.get(0).getIdRestaurante());
+    }
+
+    @Test
+    public void deveAtualizarStatusReserva() {
+        when(reservaRepository.findById("1")).thenReturn(java.util.Optional.of(reserva));
+        when(reservaRepository.save(reserva)).thenReturn(reserva);
+
+        Reserva resultado = reservaService.atualizarStatusReserva("1", "CONFIRMADA");
+        assertEquals("CONFIRMADA", resultado.getStatus());
+    }
+
+    @Test
+    public void deveBuscarReservasPorStatus() {
+        when(reservaRepository.findByStatus("PENDENTE")).thenReturn(Collections.singletonList(reserva));
+        List<Reserva> resultado = reservaService.buscarReservasPorStatus("PENDENTE");
+        assertEquals(1, resultado.size());
+        assertEquals(reserva.getStatus(), resultado.get(0).getStatus());
     }
 }
