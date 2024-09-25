@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service //No caso de Clean Architecture essa é a camada de UseCase
 public class AvaliacaoService {
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
