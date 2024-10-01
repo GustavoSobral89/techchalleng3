@@ -1,6 +1,12 @@
 # Restaurante API
 
 Esta é uma aplicação Spring Boot que fornece uma API para gerenciar restaurantes, reservas e avaliações.
+Grupo 17:
+Gustavo Sobral Carneiro
+gustavo.sobral.carneiro@gmail.com
+
+Diogo Vieira dos Santos
+diogo.vds@hotmail.com
 
 ## Tecnologias Usadas
 
