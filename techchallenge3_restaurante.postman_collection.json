@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "841afe4e-ff61-4436-a8f0-c6ceb3a85127",
+		"_postman_id": "cc0e0208-0a5f-4058-8f59-8a8c6374cdaa",
 		"name": "techchallenge3_restaurante",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8970149"
+		"_exporter_id": "30633482"
 	},
 	"item": [
 		{
@@ -208,6 +208,248 @@
 								"localhost"
 							],
 							"port": "8080",
+							"path": [
+								"restaurantes",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Restaurante Exemplo"
+								},
+								{
+									"key": "localizacao",
+									"value": "Rua das Flores, 123"
+								},
+								{
+									"key": "tipoCozinha",
+									"value": "Italiana"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AvaliacaoControllerAWS",
+			"item": [
+				{
+					"name": "buscarAvaliacoesPorRestaurante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://98.84.143.103/avaliacoes/restaurante/67890",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
+							"path": [
+								"avaliacoes",
+								"restaurante",
+								"67890"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "criarAvaliacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idRestaurante\": \"67890\",\r\n    \"idUsuario\": \"user123\",\r\n    \"nota\": 4,\r\n    \"comentario\": \"Ótima comida e atendimento!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://98.84.143.103/avaliacoes",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
+							"path": [
+								"avaliacoes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReservaControllerAWS",
+			"item": [
+				{
+					"name": "criarReserva",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idRestaurante\": \"67890\",\r\n    \"idUsuario\": \"user123\",\r\n    \"dataHora\": \"2024-09-24T19:30:00\",\r\n    \"numeroPessoas\": 4,\r\n    \"status\": \"PENDENTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://98.84.143.103/reservas",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
+							"path": [
+								"reservas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarReservasPorRestaurante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://98.84.143.103/reservas/restaurante/67890",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
+							"path": [
+								"reservas",
+								"restaurante",
+								"67890"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarReservasPorStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://98.84.143.103/reservas/status/PENDENTE",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
+							"path": [
+								"reservas",
+								"status",
+								"PENDENTE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizarStatusReserva",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"CONFIRMADA\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://98.84.143.103/reservas/66fae009864d427ac4d7adcf/status",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
+							"path": [
+								"reservas",
+								"66fae009864d427ac4d7adcf",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RestauranteControllerAWS",
+			"item": [
+				{
+					"name": "cadastrarRestaurante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Restaurante Exemplo\",\r\n    \"localizacao\": \"Rua das Flores, 123\",\r\n    \"tipoCozinha\": \"Italiana\",\r\n    \"horarioFuncionamento\": \"Seg a Sex: 11h - 23h\",\r\n    \"capacidade\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://98.84.143.103/restaurantes",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
+							"path": [
+								"restaurantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarRestaurantes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://98.84.143.103/restaurantes/buscar?nome=Restaurante Exemplo&localizacao=Rua das Flores, 123&tipoCozinha=Italiana",
+							"protocol": "http",
+							"host": [
+								"98",
+								"84",
+								"143",
+								"103"
+							],
 							"path": [
 								"restaurantes",
 								"buscar"
